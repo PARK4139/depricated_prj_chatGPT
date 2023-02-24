@@ -3,8 +3,7 @@ from datetime import time
 
 from moviepy.editor import *
 import sys
-from pytube import YouTube, Playlist
-
+from pytube import YouTube, Playlist 
 # ____________________________________________________________________________________ 채널리스트로 다운로드[대기]
 
 
@@ -27,7 +26,7 @@ from pytube import YouTube, Playlist
 
 # ____________________________________________________________________________________ 영상URL로 고화질 다운로드[in trying]
 #
-# fpath = lambda x: './tmp/' + x
+# fpath = lambda x: './from_youtube/' + x
 # DOWNLOAD_FOLDER = "[TO DO]"
 #
 #
@@ -77,7 +76,7 @@ from pytube import YouTube, Playlist
 
 
 # ____________________________________________________________________________________ 영상URL로 고화질 다운로드[in trying]
-# fpath = lambda x: './tmp/' + x
+# fpath = lambda x: './from_youtube/' + x
 # destination = "../[TO DO]"
 
 
@@ -122,7 +121,7 @@ from pytube import YouTube, Playlist
 # video 와 audio 를 합한다.
 # v.audio = a
 # v.write_videofile(fpath(f"1080/{vpath.split('/')[-1]}"))
-# tmp_src 를 삭제한다.
+# from_youtube_src 를 삭제한다.
 
 
 # def playlistdown(url: str, prefix: str = ""):
@@ -140,7 +139,7 @@ from pytube import YouTube, Playlist
 
 # ____________________________________________________________________________________ 영상URL로 고화질 다운로드[ feat sys.argv ]
 
-fpath = lambda x: './tmp/' + x
+fpath = lambda x: './from_youtube/' + x
 DOWNLOAD_FOLDER = "`"
 
 os.chdir('..')  # 부모
@@ -152,7 +151,7 @@ else:
     print(os.getcwd())
 
 
-def ydown(url: str, prefix: str = "순수비디오 순수음성 "):
+def ydown(url: str, prefix: str = "순수비디오_"):
     yt = YouTube(url)
     vpath = (
         yt.streams.filter(adaptive=True, file_extension="mp4", only_video=True)
@@ -168,7 +167,7 @@ def ydown(url: str, prefix: str = "순수비디오 순수음성 "):
         .order_by("abr")
         .desc()
         .first()
-        .download(output_path=fpath("audio/"), filename_prefix=f"{prefix} ")
+        .download(output_path=fpath("audio/"), filename_prefix="순수음성_")
     )
     afc = AudioFileClip(apath)
     vfc = VideoFileClip(vpath)
@@ -181,13 +180,10 @@ def ydown(url: str, prefix: str = "순수비디오 순수음성 "):
     # vfc.write_videofile(yt.title[0:10]+str(time)+'.mp4')
    
    
-    # vfc.write_videofile('tmp.mp4')
-    # os.renames('tmp.mp4',str(yt.title)+'.mp4')
+    # vfc.write_videofile('from_youtube.mp4')
+    # os.renames('from_youtube.mp4',str(yt.title)+'.mp4')
 
-
-
-
-def playlistdown(url: str, prefix: str = ""):
+def playlistdown(url: str, prefix: str = "플레이리스트 다운로드 시도"):
     pl = Playlist(url)
     for v in pl.video_urls:
         try:
