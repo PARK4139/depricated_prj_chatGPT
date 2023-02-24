@@ -138,17 +138,27 @@ from pytube import YouTube, Playlist
 
 
 # ____________________________________________________________________________________ 영상URL로 고화질 다운로드[ feat sys.argv ]
+directory_name = 'seperated_contents'
+fpath = lambda x: './'+directory_name+'/' + x
+DOWNLOAD_FOLDER = "from_youtube"
 
-fpath = lambda x: './from_youtube/' + x
-DOWNLOAD_FOLDER = "`"
-
-os.chdir('..')  # 부모
+os.chdir('..')  
+os.chdir('..')  
+os.chdir('`')
 if os.path.exists(DOWNLOAD_FOLDER):
-    os.chdir(DOWNLOAD_FOLDER)
+    pass
 else:
     os.mkdir(DOWNLOAD_FOLDER)
-    os.chdir(DOWNLOAD_FOLDER)
-    print(os.getcwd())
+os.chdir(DOWNLOAD_FOLDER)
+if os.path.exists(directory_name):
+    pass
+else:
+    os.mkdir(directory_name)
+os.chdir(directory_name)
+# print(os.getcwd())
+# os.chdir('..')  
+
+
 
 
 def ydown(url: str, prefix: str = "순수비디오_"):
